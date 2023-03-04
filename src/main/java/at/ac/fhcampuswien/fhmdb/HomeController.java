@@ -65,7 +65,7 @@ public class HomeController implements Initializable {
         return list;
     }
 
-    private static ArrayList<String> descSorter(ArrayList<String> list){
+    public static ArrayList<String> descSorter(ArrayList<String> list){
         return list;
     }
 }

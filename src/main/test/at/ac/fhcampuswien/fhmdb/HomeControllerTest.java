@@ -41,7 +41,7 @@ class HomeControllerTest {
         unsortetList.add("WAR");
 
         // when
-        ArrayList<String> sortetList = HomeController.ascSorter(unsortetList);
+        ArrayList<String> sortetList = HomeController.descSorter(unsortetList);
 
         // then
         ArrayList<String> rightList = new ArrayList<>();
