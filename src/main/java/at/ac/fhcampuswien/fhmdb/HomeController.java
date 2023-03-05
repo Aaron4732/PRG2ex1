@@ -72,4 +72,8 @@ public class HomeController implements Initializable {
     public static ArrayList<Movie> genreFilter(ArrayList<Movie> list, String genre){
         return list;
     }
+
+    public static ArrayList<Movie> stringFilter(ArrayList<Movie> list, String searchContent){
+        return list;
+    }
 }
