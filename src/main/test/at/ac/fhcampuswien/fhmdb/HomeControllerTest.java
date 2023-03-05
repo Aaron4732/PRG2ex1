@@ -1,5 +1,6 @@
 package at.ac.fhcampuswien.fhmdb;
 
+import at.ac.fhcampuswien.fhmdb.models.Movie;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -9,47 +10,77 @@ import static org.junit.jupiter.api.Assertions.*;
 class HomeControllerTest {
 
     @Test
-    void asc_sorter_with_4_Elements() {
+    void asc_sorter_check_1st_element() {
         // given
-        ArrayList<String> unsortetList = new ArrayList<>();
+        ArrayList<Movie> unsortetList = new ArrayList<>();
 
-        unsortetList.add("ACTION");
-        unsortetList.add("FAMILY");
-        unsortetList.add("CRIME");
-        unsortetList.add("WAR");
+        unsortetList.add(new Movie("Titanic", "Film about ship vs iceberg.", "Romance", "Drama"));
+        unsortetList.add(new Movie("Shrek", "Ogre living peacefully in his swamp.", "Family", "Comedy", "Romance"));
+        unsortetList.add(new Movie("Antman", "Movie about superhero who is also an ant.", "Action"));
+        unsortetList.add(new Movie("Lord of the rings", "Boys trying to destroy an invisibility ring.", "Adventure", "Action"));
+        unsortetList.add(new Movie("Sharknado", "Sharks falling from sky, people dying.", "Horror", "Action", "Drama"));
 
         // when
-        ArrayList<String> sortetList = HomeController.ascSorter(unsortetList);
+        ArrayList<Movie> sortetList = HomeController.ascSorter(unsortetList);
 
         // then
-        ArrayList<String> rightList = new ArrayList<>();
-        rightList.add("ACTION");
-        rightList.add("CRIME");
-        rightList.add("FAMILY");
-        rightList.add("WAR");
-
-        assertEquals(rightList, sortetList);
+        String firstExpectetElement = "Antman";
+        assertEquals(firstExpectetElement, sortetList.get(0).getTitle());
     }
     @Test
-    void desc_sorter_with_4_Elements(){
+    void asc_sorter_check_3st_element() {
         // given
-        ArrayList<String> unsortetList = new ArrayList<>();
+        ArrayList<Movie> unsortetList = new ArrayList<>();
 
-        unsortetList.add("ACTION");
-        unsortetList.add("FAMILY");
-        unsortetList.add("CRIME");
-        unsortetList.add("WAR");
+        unsortetList.add(new Movie("Titanic", "Film about ship vs iceberg.", "Romance", "Drama"));
+        unsortetList.add(new Movie("Shrek", "Ogre living peacefully in his swamp.", "Family", "Comedy", "Romance"));
+        unsortetList.add(new Movie("Antman", "Movie about superhero who is also an ant.", "Action"));
+        unsortetList.add(new Movie("Lord of the rings", "Boys trying to destroy an invisibility ring.", "Adventure", "Action"));
+        unsortetList.add(new Movie("Sharknado", "Sharks falling from sky, people dying.", "Horror", "Action", "Drama"));
 
         // when
-        ArrayList<String> sortetList = HomeController.descSorter(unsortetList);
+        ArrayList<Movie> sortetList = HomeController.ascSorter(unsortetList);
 
         // then
-        ArrayList<String> rightList = new ArrayList<>();
-        rightList.add("WAR");
-        rightList.add("FAMILY");
-        rightList.add("CRIME");
-        rightList.add("ACTION");
+        String firstExpectetElement = "Sharknado";
+        assertEquals(firstExpectetElement, sortetList.get(0).getTitle());
+    }
 
-        assertEquals(rightList, sortetList);
+    @Test
+    void desc_sorter_check_1st_element(){
+        // given
+        ArrayList<Movie> unsortetList = new ArrayList<>();
+
+        unsortetList.add(new Movie("Shrek", "Ogre living peacefully in his swamp.", "Family", "Comedy", "Romance"));
+        unsortetList.add(new Movie("Antman", "Movie about superhero who is also an ant.", "Action"));
+        unsortetList.add(new Movie("Titanic", "Film about ship vs iceberg.", "Romance", "Drama"));
+        unsortetList.add(new Movie("Lord of the rings", "Boys trying to destroy an invisibility ring.", "Adventure", "Action"));
+        unsortetList.add(new Movie("Sharknado", "Sharks falling from sky, people dying.", "Horror", "Action", "Drama"));
+
+        // when
+        ArrayList<Movie> sortetList = HomeController.ascSorter(unsortetList);
+
+        // then
+        String firstExpectetElement = "Titanic";
+        assertEquals(firstExpectetElement, sortetList.get(0).getTitle());
+    }
+
+    @Test
+    void desc_sorter_check_3st_element(){
+        // given
+        ArrayList<Movie> unsortetList = new ArrayList<>();
+
+        unsortetList.add(new Movie("Shrek", "Ogre living peacefully in his swamp.", "Family", "Comedy", "Romance"));
+        unsortetList.add(new Movie("Antman", "Movie about superhero who is also an ant.", "Action"));
+        unsortetList.add(new Movie("Titanic", "Film about ship vs iceberg.", "Romance", "Drama"));
+        unsortetList.add(new Movie("Lord of the rings", "Boys trying to destroy an invisibility ring.", "Adventure", "Action"));
+        unsortetList.add(new Movie("Sharknado", "Sharks falling from sky, people dying.", "Horror", "Action", "Drama"));
+
+        // when
+        ArrayList<Movie> sortetList = HomeController.ascSorter(unsortetList);
+
+        // then
+        String firstExpectetElement = "Sharknado";
+        assertEquals(firstExpectetElement, sortetList.get(0).getTitle());
     }
 }

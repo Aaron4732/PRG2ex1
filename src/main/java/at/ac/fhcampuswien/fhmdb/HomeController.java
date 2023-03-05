@@ -61,11 +61,12 @@ public class HomeController implements Initializable {
             }
         });
     }
-    public static ArrayList<String> ascSorter(ArrayList<String> list){
+    public static ArrayList<Movie> ascSorter(ArrayList<Movie> list){
         return list;
     }
 
-    public static ArrayList<String> descSorter(ArrayList<String> list){
+    public static ArrayList<Movie> descSorter(ArrayList<Movie> list){
         return list;
     }
+
 }
