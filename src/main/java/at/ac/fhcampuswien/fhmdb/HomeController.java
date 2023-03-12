@@ -36,17 +36,26 @@ public class HomeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        observableMovies.addAll(allMovies);         // add dummy data to observable list
+        observableMovies.addAll(Movie.initializeMovies());         // add dummy data to observable list
 
         // initialize UI stuff
         movieListView.setItems(observableMovies);   // set data of observable list to list view
         movieListView.setCellFactory(movieListView -> new MovieCell()); // use custom cell factory to display data
 
-        // TODO add genre filter items with genreComboBox.getItems().addAll(...)
         genreComboBox.setPromptText("Filter by Genre");
+        genreComboBox.setItems(Movie.getGenreList());
 
-        // TODO add event handlers to buttons and call the regarding methods
-        // either set event handlers in the fxml file (onAction) or add them here
+        searchBtn.setOnAction(actionEvent -> {
+
+
+
+            if(genreComboBox.getSelectionModel().getSelectedItem() == "All"){
+                movieListView.setItems(observableMovies);
+            }
+            else {
+                movieListView.setItems(observableMovies.filtered(movie -> movie.searchGenra((String) genreComboBox.getSelectionModel().getSelectedItem()) && 1==1));
+            }
+        } );
 
         // Sort button example:
         sortBtn.setOnAction(actionEvent -> {
@@ -58,6 +67,8 @@ public class HomeController implements Initializable {
                 sortBtn.setText("Sort (asc)");
             }
         });
+
+
     }
 
     public static ObservableList<Movie> genreFilter(ObservableList<Movie> list, String genre){
