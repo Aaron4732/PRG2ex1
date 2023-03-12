@@ -11,8 +11,7 @@ public class Movie {
     private String title;
     private String description;
     private List <String> genre;
-    private ObservableList<String> genreList = FXCollections.observableArrayList("Action", "Adventure", "Animation", "Biography", "Comedy", "Crime", "Drama", "Documentary", "Family", "Fantasy", "History", "Horror", "Musical", "Mystery", "Romance", "Science Fiction", "Sport", "Thriller", "War", "Western");
-
+    private static ObservableList<String> genreList = FXCollections.observableArrayList("All","Action", "Adventure", "Animation", "Biography", "Comedy", "Crime", "Drama", "Documentary", "Family", "Fantasy", "History", "Horror", "Musical", "Mystery", "Romance", "Science Fiction", "Sport", "Thriller", "War", "Western");
 
     // TODO add more properties here
 
@@ -43,6 +42,10 @@ public class Movie {
 
     public boolean searchGenra(String target) {
         return genre.contains(target);
+    }
+
+    public static ObservableList<String> getGenreList() {
+        return genreList;
     }
 
     public static List<Movie> initializeMovies(){
