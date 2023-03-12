@@ -46,7 +46,7 @@ public class Movie {
         movies.add(new Movie("Shrek", "Ogre living peacefully in his swamp.", "Family", "Comedy", "Romance"));
         movies.add(new Movie("Antman", "Movie about superhero who is also an ant.", "Action"));
         movies.add(new Movie("Lord of the rings", "Boys trying to destroy an invisibility ring.", "Adventure", "Action"));
-        movies.add(new Movie("Sharknado", "Sharks falling from sky, people dying.", "Horror", "Action", "Drama"));
+        movies.add(new Movie("Sharknado", "Sharks falling from sky, people dying. ", "Horror", "Action", "Drama"));
 
         return movies;
     }
