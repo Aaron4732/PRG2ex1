@@ -47,14 +47,28 @@ public class HomeController implements Initializable {
 
         searchBtn.setOnAction(actionEvent -> {
 
-
-
-            if(genreComboBox.getSelectionModel().getSelectedItem() == "All"){
-                movieListView.setItems(observableMovies);
+            if(searchField.getText() == ""){
+                if(genreComboBox.getSelectionModel().getSelectedItem() == "All"){
+                    movieListView.setItems(observableMovies);
+                }
+                else {
+                    movieListView.setItems(observableMovies.filtered(movie -> movie.searchGenra((String) genreComboBox.getSelectionModel().getSelectedItem())));
+                }
             }
-            else {
-                movieListView.setItems(observableMovies.filtered(movie -> movie.searchGenra((String) genreComboBox.getSelectionModel().getSelectedItem()) && 1==1));
+            else{
+                if(genreComboBox.getSelectionModel().getSelectedItem() == "All"){
+                    movieListView.setItems(observableMovies.filtered(movie ->
+                            Arrays.stream(movie.getTitle().split(" ")).anyMatch(word -> word.equals(searchField.getText().toString())) ||
+                            Arrays.stream(movie.getDescription().split(" ")).anyMatch(word -> word.equals(searchField.getText().toString()))));
+                }
+                else {
+                    movieListView.setItems(observableMovies.filtered(movie ->
+                            Arrays.stream(movie.getTitle().split(" ")).anyMatch(word -> word.equals(searchField.getText().toString())) ||
+                            Arrays.stream(movie.getDescription().split(" ")).anyMatch(word -> word.equals(searchField.getText().toString())) &&
+                            movie.searchGenra((String) genreComboBox.getSelectionModel().getSelectedItem())));
+                }
             }
+
         } );
 
         // Sort button example:
