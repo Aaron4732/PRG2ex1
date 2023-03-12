@@ -1,6 +1,8 @@
 package at.ac.fhcampuswien.fhmdb;
 
 import at.ac.fhcampuswien.fhmdb.models.Movie;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -47,6 +49,32 @@ public class MovieTest {
 
         //Then
         assertLinesMatch(testList, movie.getGenre());
+
+    }
+
+    @Test
+    void are_movies_in_list_the_right_searched_genre_true() {
+        //Given
+        Movie movie = new Movie("Titanic", "Film about ship vs iceberg.", "Romance", "Drama");
+
+        //When
+        movie.searchGenre("Drama");
+
+        //Then
+        assertTrue(movie.searchGenre("Drama"));
+
+    }
+
+    @Test
+    void are_movies_in_list_the_right_searched_genre_false() {
+        //Given
+        Movie movie = new Movie("Titanic", "Film about ship vs iceberg.", "Romance", "Drama");
+
+        //When
+        movie.searchGenre("Action");
+
+        //Then
+        assertFalse(movie.searchGenre("Action"));
 
     }
 
