@@ -13,20 +13,11 @@ public class Movie {
     private List <String> genre;
     private static ObservableList<String> genreList = FXCollections.observableArrayList("All","Action", "Adventure", "Animation", "Biography", "Comedy", "Crime", "Drama", "Documentary", "Family", "Fantasy", "History", "Horror", "Musical", "Mystery", "Romance", "Science Fiction", "Sport", "Thriller", "War", "Western");
 
-    // TODO add more properties here
-
     public Movie(String title, String description, String ...genre) {
         this.title = title;
         this.description = description;
         this.genre = List.of(genre);
     }
-
-
-    /* public void addGenre(String genre) {
-        genreList.add(genre);
-    }
-    */
-
 
     public String getTitle() {
         return title;
@@ -47,6 +38,7 @@ public class Movie {
     public static ObservableList<String> getGenreList() {
         return genreList;
     }
+
     public boolean hasStringInTitleOrDescription(String context){
         return Arrays.stream(this.getTitle().split(" ")).anyMatch(word -> word.equals(context)) ||
                 Arrays.stream(this.getDescription().split(" ")).anyMatch(word -> word.equals(context));
