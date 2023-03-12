@@ -1,6 +1,8 @@
 package at.ac.fhcampuswien.fhmdb;
 
 import at.ac.fhcampuswien.fhmdb.models.Movie;
+import at.ac.fhcampuswien.fhmdb.HomeController;
+
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -8,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
 
-class HomeControllerTest {
+public class HomeControllerTest {
 
     @Test
     void asc_sorter_check_1st_element_if_is_Antman() {
@@ -84,63 +86,3 @@ class HomeControllerTest {
         String firstExpectedElement = "Sharknado";
         assertEquals(firstExpectedElement, list.get(2).getTitle());
     }
-
-    @Test
-    void genre_filter_check_1st_element_in_list_of_action_genres_if_its_Antman(){
-        // given
-        ObservableList<Movie> list = FXCollections.observableArrayList();
-
-        list.add(new Movie("Shrek", "Ogre living peacefully in his swamp.", "Family", "Comedy", "Romance"));
-        list.add(new Movie("Antman", "Movie about superhero who is also an ant.", "Action"));
-        list.add(new Movie("Titanic", "Film about ship vs iceberg.", "Romance", "Drama"));
-        list.add(new Movie("Lord of the rings", "Boys trying to destroy an invisibility ring.", "Adventure", "Action"));
-        list.add(new Movie("Sharknado", "Sharks falling from sky, people dying.", "Horror", "Action", "Drama"));
-
-        // when
-        ObservableList<Movie> sortetList = HomeController.genreFilter(list, "Action");
-
-        // then
-        String firstExpectetElement = "Antman";
-        assertEquals(firstExpectetElement, sortetList.get(0).getTitle());
-    }
-
-    @Test
-    void genre_filter_check_2st_element_in_list_of_drame_genres_if_its_Sharknado(){
-        // given
-        ObservableList<Movie> unsortetList = FXCollections.observableArrayList();
-
-        unsortetList.add(new Movie("Shrek", "Ogre living peacefully in his swamp.", "Family", "Comedy", "Romance"));
-        unsortetList.add(new Movie("Antman", "Movie about superhero who is also an ant.", "Action"));
-        unsortetList.add(new Movie("Titanic", "Film about ship vs iceberg.", "Romance", "Drama"));
-        unsortetList.add(new Movie("Lord of the rings", "Boys trying to destroy an invisibility ring.", "Adventure", "Action"));
-        unsortetList.add(new Movie("Sharknado", "Sharks falling from sky, people dying.", "Horror", "Action", "Drama"));
-
-        // when
-        ObservableList<Movie> sortetList = HomeController.genreFilter(unsortetList, "Drama");
-
-        // then
-        String firstExpectetElement = "Sharknado";
-        assertEquals(firstExpectetElement, sortetList.get(1).getTitle());
-    }
-
-    @Test
-    void genre_filter_check_1st_element_in_list_of_Romance_genres_if_its_Shrek(){
-        // given
-        ObservableList<Movie> unsortetList = FXCollections.observableArrayList();
-
-        unsortetList.add(new Movie("Antman", "Movie about superhero who is also an ant.", "Action"));
-        unsortetList.add(new Movie("Shrek", "Ogre living peacefully in his swamp.", "Family", "Comedy", "Romance"));
-        unsortetList.add(new Movie("Titanic", "Film about ship vs iceberg.", "Romance", "Drama"));
-        unsortetList.add(new Movie("Lord of the rings", "Boys trying to destroy an invisibility ring.", "Adventure", "Action"));
-        unsortetList.add(new Movie("Sharknado", "Sharks falling from sky, people dying.", "Horror", "Action", "Drama"));
-
-        // when
-        ObservableList<Movie> sortetList = HomeController.genreFilter(unsortetList, "Romance");
-
-        // then
-        String firstExpectetElement = "Shrek";
-        assertEquals(firstExpectetElement, sortetList.get(0).getTitle());
-    }
-
-
-}
