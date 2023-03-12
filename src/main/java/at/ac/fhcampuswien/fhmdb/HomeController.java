@@ -57,11 +57,11 @@ public class HomeController implements Initializable {
             }
             else{
                 if(genreComboBox.getSelectionModel().getSelectedItem() == "All"){
-                    movieListView.setItems(observableMovies.filtered(movie -> stringFilter(movie, searchField.getText())));
+                    movieListView.setItems(observableMovies.filtered(movie -> movie.hasStringInTitleOrDescription(searchField.getText())));
                 }
                 else {
                     movieListView.setItems(observableMovies.filtered(movie ->
-                            stringFilter(movie, searchField.getText()) &&
+                            movie.hasStringInTitleOrDescription(searchField.getText()) &&
                             movie.searchGenra((String) genreComboBox.getSelectionModel().getSelectedItem())));
                 }
             }
@@ -93,10 +93,6 @@ public class HomeController implements Initializable {
         return newList;
     }
 
-    public static boolean stringFilter(Movie movie, String context){
-        return Arrays.stream(movie.getTitle().split(" ")).anyMatch(word -> word.equals(context)) ||
-               Arrays.stream(movie.getDescription().split(" ")).anyMatch(word -> word.equals(context))
-        ;
-    }
+
 }
 

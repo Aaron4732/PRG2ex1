@@ -154,7 +154,7 @@ class HomeControllerTest {
         unsortetList.add(new Movie("Sharknado", "Sharks falling from sky, people dying.", "Horror", "Action", "Drama"));
 
         // when
-        ObservableList<Movie> sortetList = HomeController.stringFilter(unsortetList, "shrek");
+        ObservableList<Movie> sortetList = HomeController.hasMovieString(unsortetList, "shrek");
 
         // then
         String firstExpectetElement = "Shrek";
@@ -173,7 +173,7 @@ class HomeControllerTest {
         unsortetList.add(new Movie("Sharknado", "Sharks falling from sky, people dying.", "Horror", "Action", "Drama"));
 
         // when
-        ObservableList<Movie> sortetList = HomeController.stringFilter(unsortetList, "iceberg");
+        ObservableList<Movie> sortetList = HomeController.hasMovieString(unsortetList, "iceberg");
 
         // then
         String firstExpectetElement = "Titanic";
@@ -192,7 +192,7 @@ class HomeControllerTest {
         unsortetList.add(new Movie("Sharknado", "Sharks falling from sky, people dying.", "Horror", "Action", "Drama"));
 
         // when
-        ObservableList<Movie> sortetList = HomeController.stringFilter(unsortetList, "iceberg");
+        ObservableList<Movie> sortetList = HomeController.hasMovieString(unsortetList, "iceberg");
 
         // then
         String firstExpectetElement = "Titanic";
