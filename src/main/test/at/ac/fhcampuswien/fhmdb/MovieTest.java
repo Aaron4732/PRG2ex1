@@ -4,6 +4,7 @@ import at.ac.fhcampuswien.fhmdb.models.Movie;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
@@ -48,4 +49,30 @@ public class MovieTest {
         assertLinesMatch(testList, movie.getGenre());
 
     }
+
+    @Test
+    void check_if_title_or_description_contains_String_true(){
+        //Given
+        Movie movie = new Movie("Titanic", "Film about ship vs iceberg.", "Romance", "Drama", "History");
+
+        //When
+        movie.hasStringInTitleOrDescription("ship");
+
+        //Then
+        assertTrue(movie.hasStringInTitleOrDescription("ship"));
+    }
+
+    @Test
+    void check_if_title_or_description_contains_String_false(){
+        //Given
+        Movie movie = new Movie("Titanic", "Film about ship vs iceberg.", "Romance", "Drama", "History");
+
+        //When
+        movie.hasStringInTitleOrDescription("water");
+
+        //Then
+        assertFalse(movie.hasStringInTitleOrDescription("water"));
+    }
+
+
 }
