@@ -12,9 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class HomeController implements Initializable {
     @FXML
@@ -62,18 +60,29 @@ public class HomeController implements Initializable {
         });
     }
     public static ArrayList<Movie> ascSorter(ArrayList<Movie> list){
+        Collections.sort(list, new MovieComparatorASC());
         return list;
     }
 
     public static ArrayList<Movie> descSorter(ArrayList<Movie> list){
+        Collections.sort(list, new MovieComparatorASC());
+        Collections.reverse(list);
         return list;
     }
 
     public static ArrayList<Movie> genreFilter(ArrayList<Movie> list, String genre){
-        return list;
+        ArrayList<Movie> newList = new ArrayList<>();
+
+        for (Movie movie : list){
+            if (movie.searchGenra(genre)){
+                newList.add(movie);
+            }
+        }
+        return newList;
     }
 
     public static ArrayList<Movie> stringFilter(ArrayList<Movie> list, String searchContent){
         return list;
     }
 }
+

@@ -1,6 +1,7 @@
 package at.ac.fhcampuswien.fhmdb.models;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Movie {
@@ -31,6 +32,10 @@ public class Movie {
 
     public String[] getGenre(){
         return genre;
+    }
+
+    public boolean searchGenra(String target) {
+        return Arrays.stream(genre).anyMatch(s -> s.equals(target));
     }
 
     public static List<Movie> initializeMovies(){

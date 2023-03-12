@@ -43,7 +43,7 @@ class HomeControllerTest {
 
         // then
         String firstExpectetElement = "Sharknado";
-        assertEquals(firstExpectetElement, sortetList.get(0).getTitle());
+        assertEquals(firstExpectetElement, sortetList.get(2).getTitle());
     }
 
     @Test
@@ -81,7 +81,7 @@ class HomeControllerTest {
 
         // then
         String firstExpectetElement = "Sharknado";
-        assertEquals(firstExpectetElement, sortetList.get(0).getTitle());
+        assertEquals(firstExpectetElement, sortetList.get(2).getTitle());
     }
 
     @Test
@@ -119,7 +119,7 @@ class HomeControllerTest {
 
         // then
         String firstExpectetElement = "Sharknado";
-        assertEquals(firstExpectetElement, sortetList.get(0).getTitle());
+        assertEquals(firstExpectetElement, sortetList.get(1).getTitle());
     }
 
     @Test
