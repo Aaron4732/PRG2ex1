@@ -51,27 +51,17 @@ public class HomeController implements Initializable {
         // Sort button example:
         sortBtn.setOnAction(actionEvent -> {
             if(sortBtn.getText().equals("Sort (asc)")) {
-                // TODO sort observableMovies ascending
+                observableMovies.sort(new MovieComparatorASC());
                 sortBtn.setText("Sort (desc)");
             } else {
-                // TODO sort observableMovies descending
+                observableMovies.sort(new MovieComparatorDESC());
                 sortBtn.setText("Sort (asc)");
             }
         });
     }
-    public static ArrayList<Movie> ascSorter(ArrayList<Movie> list){
-        Collections.sort(list, new MovieComparatorASC());
-        return list;
-    }
 
-    public static ArrayList<Movie> descSorter(ArrayList<Movie> list){
-        Collections.sort(list, new MovieComparatorASC());
-        Collections.reverse(list);
-        return list;
-    }
-
-    public static ArrayList<Movie> genreFilter(ArrayList<Movie> list, String genre){
-        ArrayList<Movie> newList = new ArrayList<>();
+    public static ObservableList<Movie> genreFilter(ObservableList<Movie> list, String genre){
+        ObservableList<Movie> newList = FXCollections.observableArrayList();
 
         for (Movie movie : list){
             if (movie.searchGenra(genre)){
@@ -81,7 +71,7 @@ public class HomeController implements Initializable {
         return newList;
     }
 
-    public static ArrayList<Movie> stringFilter(ArrayList<Movie> list, String searchContent){
+    public static ObservableList<Movie> stringFilter(ObservableList<Movie> list, String searchContent){
         return list;
     }
 }
