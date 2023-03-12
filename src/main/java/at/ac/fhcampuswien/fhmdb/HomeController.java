@@ -46,11 +46,14 @@ public class HomeController implements Initializable {
         genreComboBox.setItems(Movie.getGenreList());
 
         searchBtn.setOnAction(actionEvent -> {
+
+
+
             if(genreComboBox.getSelectionModel().getSelectedItem() == "All"){
                 movieListView.setItems(observableMovies);
             }
             else {
-                movieListView.setItems(observableMovies.filtered(movie -> movie.searchGenra((String) genreComboBox.getSelectionModel().getSelectedItem())));
+                movieListView.setItems(observableMovies.filtered(movie -> movie.searchGenra((String) genreComboBox.getSelectionModel().getSelectedItem()) && 1==1));
             }
         } );
 
