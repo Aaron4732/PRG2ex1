@@ -47,14 +47,25 @@ public class HomeController implements Initializable {
 
         searchBtn.setOnAction(actionEvent -> {
 
-
-
-            if(genreComboBox.getSelectionModel().getSelectedItem() == "All"){
-                movieListView.setItems(observableMovies);
+            if(searchField.getText() == ""){
+                if(genreComboBox.getSelectionModel().getSelectedItem() == "All"){
+                    movieListView.setItems(observableMovies);
+                }
+                else {
+                    movieListView.setItems(observableMovies.filtered(movie -> movie.searchGenra((String) genreComboBox.getSelectionModel().getSelectedItem())));
+                }
             }
-            else {
-                movieListView.setItems(observableMovies.filtered(movie -> movie.searchGenra((String) genreComboBox.getSelectionModel().getSelectedItem()) && 1==1));
+            else{
+                if(genreComboBox.getSelectionModel().getSelectedItem() == "All"){
+                    movieListView.setItems(observableMovies.filtered(movie -> movie.hasStringInTitleOrDescription(searchField.getText())));
+                }
+                else {
+                    movieListView.setItems(observableMovies.filtered(movie ->
+                            movie.hasStringInTitleOrDescription(searchField.getText()) &&
+                            movie.searchGenra((String) genreComboBox.getSelectionModel().getSelectedItem())));
+                }
             }
+
         } );
 
         // Sort button example:
@@ -82,8 +93,6 @@ public class HomeController implements Initializable {
         return newList;
     }
 
-    public static ObservableList<Movie> stringFilter(ObservableList<Movie> list, String searchContent){
-        return list;
-    }
+
 }
 
