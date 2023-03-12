@@ -1,5 +1,8 @@
 package at.ac.fhcampuswien.fhmdb.models;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -8,6 +11,8 @@ public class Movie {
     private String title;
     private String description;
     private String[] genre;
+    private ObservableList<String> genreList = FXCollections.observableArrayList();
+
     //private ArrayList<String> genres = new ArrayList<String>();
     // TODO add more properties here
 
@@ -16,11 +21,10 @@ public class Movie {
         this.description = description;
         this.genre = genre;
     }
-    /*
-    public void addGenre(String genre){
-        genres.add(genre);
+
+    public void addGenre(String genre) {
+        genreList.add(genre);
     }
-     */
 
     public String getTitle() {
         return title;
@@ -41,7 +45,6 @@ public class Movie {
     public static List<Movie> initializeMovies(){
         List<Movie> movies = new ArrayList<>();
         // TODO add some dummy data here
-
 
         movies.add(new Movie("Titanic", "Film about ship vs iceberg.", "Romance", "Drama", "History"));
         movies.add(new Movie("Shrek", "Ogre living peacefully in his swamp.", "Family", "Comedy", "Romance", "Animation"));
