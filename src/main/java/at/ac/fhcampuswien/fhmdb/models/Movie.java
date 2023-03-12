@@ -47,6 +47,10 @@ public class Movie {
     public static ObservableList<String> getGenreList() {
         return genreList;
     }
+    public boolean hasStringInTitleOrDescription(String context){
+        return Arrays.stream(this.getTitle().split(" ")).anyMatch(word -> word.equals(context)) ||
+                Arrays.stream(this.getDescription().split(" ")).anyMatch(word -> word.equals(context));
+    }
 
     public static List<Movie> initializeMovies(){
         List<Movie> movies = new ArrayList<>();
