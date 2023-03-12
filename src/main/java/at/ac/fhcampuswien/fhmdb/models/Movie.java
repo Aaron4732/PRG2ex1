@@ -13,20 +13,11 @@ public class Movie {
     private String[] genre;
     private static ObservableList<String> genreList = FXCollections.observableArrayList("All","Action", "Adventure", "Animation", "Biography", "Comedy", "Crime", "Drama", "Documentary", "Family", "Fantasy", "History", "Horror", "Musical", "Mystery", "Romance", "Science Fiction", "Sport", "Thriller", "War", "Western");
 
-
-    // TODO add more properties here
-
     public Movie(String title, String description, String ...genre) {
         this.title = title;
         this.description = description;
         this.genre = genre;
     }
-
-    /*
-    public void addGenre(String genre) {
-        genreList.add(genre);
-    }
-    */
 
     public String getTitle() {
         return title;

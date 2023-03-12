@@ -36,7 +36,8 @@ public class HomeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        observableMovies.addAll(Movie.initializeMovies());         // add dummy data to observable list
+        observableMovies.addAll(Movie.initializeMovies());
+        observableMovies.sort(new MovieComparatorASC());// add dummy data to observable list
 
         // initialize UI stuff
         movieListView.setItems(observableMovies);   // set data of observable list to list view
@@ -48,24 +49,11 @@ public class HomeController implements Initializable {
         searchBtn.setOnAction(actionEvent -> {
 
             if(searchField.getText() == ""){
-                if(genreComboBox.getSelectionModel().getSelectedItem() == "All"){
-                    movieListView.setItems(observableMovies);
-                }
-                else {
-                    movieListView.setItems(observableMovies.filtered(movie -> movie.searchGenra((String) genreComboBox.getSelectionModel().getSelectedItem())));
-                }
+                searchWhitSearchField();
             }
             else{
-                if(genreComboBox.getSelectionModel().getSelectedItem() == "All"){
-                    movieListView.setItems(observableMovies.filtered(movie -> movie.hasStringInTitleOrDescription(searchField.getText())));
-                }
-                else {
-                    movieListView.setItems(observableMovies.filtered(movie ->
-                            movie.hasStringInTitleOrDescription(searchField.getText()) &&
-                            movie.searchGenra((String) genreComboBox.getSelectionModel().getSelectedItem())));
-                }
+                searchWhitNoSearchField();
             }
-
         } );
 
         // Sort button example:
@@ -78,21 +66,27 @@ public class HomeController implements Initializable {
                 sortBtn.setText("Sort (asc)");
             }
         });
-
-
     }
 
-    public static ObservableList<Movie> genreFilter(ObservableList<Movie> list, String genre){
-        ObservableList<Movie> newList = FXCollections.observableArrayList();
-
-        for (Movie movie : list){
-            if (movie.searchGenra(genre)){
-                newList.add(movie);
-            }
+    public void searchWhitSearchField(){
+        if(genreComboBox.getSelectionModel().getSelectedItem() == "All"){
+            movieListView.setItems(observableMovies);
         }
-        return newList;
+        else {
+            movieListView.setItems(observableMovies.filtered(movie -> movie.searchGenra((String) genreComboBox.getSelectionModel().getSelectedItem())));
+        }
     }
 
-
+    public void searchWhitNoSearchField(){
+        if(genreComboBox.getSelectionModel().getSelectedItem() == "All"){
+            movieListView.setItems(observableMovies.filtered(movie ->
+                    movie.hasStringInTitleOrDescription(searchField.getText())));
+        }
+        else {
+            movieListView.setItems(observableMovies.filtered(movie ->
+                    movie.hasStringInTitleOrDescription(searchField.getText()) &&
+                            movie.searchGenra((String) genreComboBox.getSelectionModel().getSelectedItem())));
+        }
+    }
 }
 
