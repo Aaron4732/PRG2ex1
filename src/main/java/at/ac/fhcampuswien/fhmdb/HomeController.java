@@ -52,7 +52,7 @@ public class HomeController implements Initializable {
                     movieListView.setItems(observableMovies);
                 }
                 else {
-                    movieListView.setItems(observableMovies.filtered(movie -> movie.searchGenra((String) genreComboBox.getSelectionModel().getSelectedItem())));
+                    movieListView.setItems(observableMovies.filtered(movie -> movie.searchGenre((String) genreComboBox.getSelectionModel().getSelectedItem())));
                 }
             }
             else{
@@ -62,7 +62,7 @@ public class HomeController implements Initializable {
                 else {
                     movieListView.setItems(observableMovies.filtered(movie ->
                             movie.hasStringInTitleOrDescription(searchField.getText()) &&
-                            movie.searchGenra((String) genreComboBox.getSelectionModel().getSelectedItem())));
+                            movie.searchGenre((String) genreComboBox.getSelectionModel().getSelectedItem())));
                 }
             }
 
@@ -86,7 +86,7 @@ public class HomeController implements Initializable {
         ObservableList<Movie> newList = FXCollections.observableArrayList();
 
         for (Movie movie : list){
-            if (movie.searchGenra(genre)){
+            if (movie.searchGenre(genre)){
                 newList.add(movie);
             }
         }
