@@ -10,7 +10,7 @@ import java.util.List;
 public class Movie {
     private String title;
     private String description;
-    private String[] genre;
+    private List <String> genre;
     private ObservableList<String> genreList = FXCollections.observableArrayList("Action", "Adventure", "Animation", "Biography", "Comedy", "Crime", "Drama", "Documentary", "Family", "Fantasy", "History", "Horror", "Musical", "Mystery", "Romance", "Science Fiction", "Sport", "Thriller", "War", "Western");
 
 
@@ -19,14 +19,15 @@ public class Movie {
     public Movie(String title, String description, String ...genre) {
         this.title = title;
         this.description = description;
-        this.genre = genre;
+        this.genre = List.of(genre);
     }
 
-    /*
-    public void addGenre(String genre) {
+
+    /* public void addGenre(String genre) {
         genreList.add(genre);
     }
     */
+
 
     public String getTitle() {
         return title;
@@ -36,12 +37,12 @@ public class Movie {
         return description;
     }
 
-    public String[] getGenre(){
+    public List <String> getGenre(){
         return genre;
     }
 
     public boolean searchGenra(String target) {
-        return Arrays.stream(genre).anyMatch(s -> s.equals(target));
+        return genre.contains(target);
     }
 
     public static List<Movie> initializeMovies(){
