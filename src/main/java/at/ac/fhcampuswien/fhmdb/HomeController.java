@@ -36,7 +36,7 @@ public class HomeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        observableMovies.addAll(Movie.initializeMovies());
+        observableMovies.addAll(allMovies);
         observableMovies.sort(new MovieComparatorASC());// add dummy data to observable list
 
         // initialize UI stuff
