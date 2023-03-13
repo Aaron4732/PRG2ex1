@@ -49,10 +49,10 @@ public class HomeController implements Initializable {
         searchBtn.setOnAction(actionEvent -> {
 
             if(searchField.getText() == ""){
-                searchWhitSearchField();
+                searchWhitNoSearchField();
             }
             else{
-                searchWhitNoSearchField();
+                searchWhitSearchField();
             }
         } );
 
@@ -68,7 +68,7 @@ public class HomeController implements Initializable {
         });
     }
 
-    public void searchWhitSearchField(){
+    public void searchWhitNoSearchField(){
         if(genreComboBox.getSelectionModel().getSelectedItem() == "All"){
             movieListView.setItems(observableMovies);
         }
@@ -77,7 +77,7 @@ public class HomeController implements Initializable {
         }
     }
 
-    public void searchWhitNoSearchField(){
+    public void searchWhitSearchField(){
         if(genreComboBox.getSelectionModel().getSelectedItem() == "All"){
             movieListView.setItems(observableMovies.filtered(movie ->
                     movie.hasStringInTitleOrDescription(searchField.getText())));
