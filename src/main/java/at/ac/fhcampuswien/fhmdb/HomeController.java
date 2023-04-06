@@ -49,10 +49,10 @@ public class HomeController implements Initializable {
         searchBtn.setOnAction(actionEvent -> {
 
             if(searchField.getText() == ""){
-                searchWhitSearchField();
+                searchWithSearchField();
             }
             else{
-                searchWhitNoSearchField();
+                searchWithNoSearchField();
             }
         } );
 
@@ -68,16 +68,16 @@ public class HomeController implements Initializable {
         });
     }
 
-    public void searchWhitSearchField(){
+    public void searchWithNoSearchField(){
         if(genreComboBox.getSelectionModel().getSelectedItem() == "All"){
             movieListView.setItems(observableMovies);
         }
         else {
-            movieListView.setItems(observableMovies.filtered(movie -> movie.searchGenra((String) genreComboBox.getSelectionModel().getSelectedItem())));
+            movieListView.setItems(observableMovies.filtered(movie -> movie.searchGenre((String) genreComboBox.getSelectionModel().getSelectedItem())));
         }
     }
 
-    public void searchWhitNoSearchField(){
+    public void searchWithSearchField(){
         if(genreComboBox.getSelectionModel().getSelectedItem() == "All"){
             movieListView.setItems(observableMovies.filtered(movie ->
                     movie.hasStringInTitleOrDescription(searchField.getText())));
@@ -85,7 +85,7 @@ public class HomeController implements Initializable {
         else {
             movieListView.setItems(observableMovies.filtered(movie ->
                     movie.hasStringInTitleOrDescription(searchField.getText()) &&
-                            movie.searchGenra((String) genreComboBox.getSelectionModel().getSelectedItem())));
+                            movie.searchGenre((String) genreComboBox.getSelectionModel().getSelectedItem())));
         }
     }
 }
