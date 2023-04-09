@@ -31,7 +31,7 @@ public class Movie {
         return genre;
     }
 
-    public boolean searchGenra(String target) {
+    public boolean searchGenre(String target) {
         return genre.contains(target);
     }
 
@@ -46,7 +46,6 @@ public class Movie {
 
     public static List<Movie> initializeMovies(){
         List<Movie> movies = new ArrayList<>();
-        // TODO add some dummy data here
 
         movies.add(new Movie("Titanic", "Film about ship vs iceberg.", "Romance", "Drama", "History"));
         movies.add(new Movie("Shrek", "Ogre living peacefully in his swamp.", "Family", "Comedy", "Romance", "Animation"));

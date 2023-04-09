@@ -86,3 +86,5 @@ public class HomeControllerTest {
         String firstExpectedElement = "Sharknado";
         assertEquals(firstExpectedElement, list.get(2).getTitle());
     }
+
+}
