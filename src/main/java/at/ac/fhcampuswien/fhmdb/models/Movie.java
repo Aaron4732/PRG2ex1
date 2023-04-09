@@ -3,6 +3,7 @@ package at.ac.fhcampuswien.fhmdb.models;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class Movie {
     private String title;
@@ -10,40 +11,7 @@ public class Movie {
     private List<Genres> genre;
 //  private static ObservableList<String> genreList = FXCollections.observableArrayList("All","Action", "Adventure", "Animation", "Biography", "Comedy", "Crime", "Drama", "Documentary", "Family", "Fantasy", "History", "Horror", "Musical", "Mystery", "Romance", "Science Fiction", "Sport", "Thriller", "War", "Western");
 
-    public enum Genres {
-        ALL("All"),
-        ACTION("Action"),
-        ADVENTURE("Adventure"),
-        ANIMATION("Animation"),
-        BIOGRAPHY("Biography"),
-        COMEDY("Comedy"),
-        CRIME("Crime"),
-        DRAMA("Drama"),
-        DOCUMENTARY("Documentary"),
-        FAMILY("Family"),
-        FANTASY("Fantasy"),
-        HISTORY("History"),
-        HORROR("Horror"),
-        MUSICAL("Musical"),
-        MYSTERY("Mystery"),
-        ROMANCE("Romance"),
-        SCIENCE_FICTION("Science Fiction"),
-        SPORT("Sport"),
-        THRILLER("Thriller"),
-        WAR("War"),
-        WESTERN("Western");
 
-        private final String genre;
-
-        Genres(String genre){
-            this.genre = genre;
-        }
-
-
-        public String toString(){
-            return genre;
-        }
-    }
 
     List<Genres> GenreList = Arrays.asList(Genres.values());
 
@@ -70,7 +38,11 @@ public class Movie {
     public List<Genres> getGenreList() { return GenreList; }
 
     public boolean searchGenra(String target) {
-        return genre.contains(target);
+        //return genre.contains(target);
+        for (Genres aktuellGenre : genre) {
+            if (Objects.equals(aktuellGenre.toString(), target)) return true;
+        }
+        return false;
     }
     //public static ObservableList<String> getGenre() {return Genres;}
 

@@ -1,5 +1,6 @@
 package at.ac.fhcampuswien.fhmdb;
 
+import at.ac.fhcampuswien.fhmdb.models.Genres;
 import at.ac.fhcampuswien.fhmdb.models.Movie;
 import at.ac.fhcampuswien.fhmdb.ui.MovieCell;
 import com.jfoenix.controls.JFXButton;
@@ -44,16 +45,16 @@ public class HomeController implements Initializable {
         movieListView.setCellFactory(movieListView -> new MovieCell()); // use custom cell factory to display data
 
         genreComboBox.setPromptText("Filter by Genre");
-        genreComboBox.setItems(FXCollections.observableArrayList(Movie.Genres.values())); //geändert von Trixi
+        genreComboBox.setItems(FXCollections.observableArrayList(Genres.values())); //geändert von Trixi
 
 
         searchBtn.setOnAction(actionEvent -> {
 
-            if(searchField.getText() == ""){
-                searchWhitSearchField();
+            if(Objects.equals(searchField.getText(), "")){
+                searchWhitNoSearchField();
             }
             else{
-                searchWhitNoSearchField();
+                searchWhitSearchField();
             }
         } );
 
@@ -69,24 +70,25 @@ public class HomeController implements Initializable {
         });
     }
 
-    public void searchWhitSearchField(){
-        if(genreComboBox.getSelectionModel().getSelectedItem() == "All"){
+    public void searchWhitNoSearchField(){
+        System.out.println(genreComboBox.getSelectionModel().getSelectedItem().toString());
+        if(Objects.equals(genreComboBox.getSelectionModel().getSelectedItem().toString(), "All")){
             movieListView.setItems(observableMovies);
         }
         else {
-            movieListView.setItems(observableMovies.filtered(movie -> movie.searchGenra((String) genreComboBox.getSelectionModel().getSelectedItem())));
+            movieListView.setItems(observableMovies.filtered(movie -> movie.searchGenra(genreComboBox.getSelectionModel().getSelectedItem().toString())));
         }
     }
 
-    public void searchWhitNoSearchField(){
-        if(genreComboBox.getSelectionModel().getSelectedItem() == "All"){
+    public void searchWhitSearchField(){
+        if(genreComboBox.getSelectionModel().getSelectedItem().toString() == "All"){
             movieListView.setItems(observableMovies.filtered(movie ->
                     movie.hasStringInTitleOrDescription(searchField.getText())));
         }
         else {
             movieListView.setItems(observableMovies.filtered(movie ->
                     movie.hasStringInTitleOrDescription(searchField.getText()) &&
-                            movie.searchGenra((String) genreComboBox.getSelectionModel().getSelectedItem())));
+                            movie.searchGenra((String) genreComboBox.getSelectionModel().getSelectedItem().toString())));
         }
     }
 }
