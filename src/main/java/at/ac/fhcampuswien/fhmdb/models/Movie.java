@@ -31,7 +31,7 @@ public class Movie {
         return genre;
     }
 
-    public boolean searchGenre(String target) {
+    public boolean searchGenra(String target) {
         return genre.contains(target);
     }
 
