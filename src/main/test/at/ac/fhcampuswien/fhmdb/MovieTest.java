@@ -58,10 +58,10 @@ public class MovieTest {
         Movie movie = new Movie("Titanic", "Film about ship vs iceberg.", "Romance", "Drama");
 
         //When
-        movie.searchGenra("Drama");
+        movie.searchGenre("Drama");
 
         //Then
-        assertTrue(movie.searchGenra("Drama"));
+        assertTrue(movie.searchGenre("Drama"));
 
     }
 
@@ -71,10 +71,10 @@ public class MovieTest {
         Movie movie = new Movie("Titanic", "Film about ship vs iceberg.", "Romance", "Drama");
 
         //When
-        movie.searchGenra("Action");
+        movie.searchGenre("Action");
 
         //Then
-        assertFalse(movie.searchGenra("Action"));
+        assertFalse(movie.searchGenre("Action"));
 
     }
 
