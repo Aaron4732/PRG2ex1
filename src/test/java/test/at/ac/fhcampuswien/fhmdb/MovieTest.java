@@ -2,14 +2,9 @@ package test.at.ac.fhcampuswien.fhmdb;
 
 import at.ac.fhcampuswien.fhmdb.models.Genres;
 import at.ac.fhcampuswien.fhmdb.models.Movie;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -59,10 +54,10 @@ public class MovieTest {
         Movie movie = new Movie("Titanic", "Film about ship vs iceberg.", Arrays.asList(Genres.ROMANCE, Genres.DRAMA, Genres.HISTORY));
 
         //When
-        movie.searchGenra("Drama");
+        movie.searchGenre("Drama");
 
         //Then
-        assertTrue(movie.searchGenra("Drama"));
+        assertTrue(movie.searchGenre("Drama"));
 
     }
 
@@ -72,10 +67,10 @@ public class MovieTest {
         Movie movie = new Movie("Titanic", "Film about ship vs iceberg.", Arrays.asList(Genres.ROMANCE, Genres.DRAMA, Genres.HISTORY));
 
         //When
-        movie.searchGenra("Action");
+        movie.searchGenre("Action");
 
         //Then
-        assertFalse(movie.searchGenra("Action"));
+        assertFalse(movie.searchGenre("Action"));
 
     }
 
