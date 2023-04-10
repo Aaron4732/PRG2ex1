@@ -1,6 +1,4 @@
-/* Auskommentiert von Trixi
 package at.ac.fhcampuswien.fhmdb.api;
-
 import com.google.gson.Gson;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -53,4 +51,3 @@ public class CheckAPI {
     }
 }
 
- */
