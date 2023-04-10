@@ -37,7 +37,7 @@ public class Movie {
 
     public List<Genres> getGenreList() { return GenreList; }
 
-    public boolean searchGenra(String target) {
+    public boolean searchGenre(String target) {
         //return genre.contains(target);
         for (Genres aktuellGenre : genre) {
             if (Objects.equals(aktuellGenre.toString(), target)) return true;
