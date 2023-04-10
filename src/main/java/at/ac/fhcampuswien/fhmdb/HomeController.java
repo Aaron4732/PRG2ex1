@@ -89,6 +89,7 @@ public class HomeController implements Initializable {
             movieListView.setItems(observableMovies.filtered(movie ->
                     movie.hasStringInTitleOrDescription(searchField.getText()) &&
                             movie.searchGenre((String) genreComboBox.getSelectionModel().getSelectedItem().toString())));
+
         }
     }
 }

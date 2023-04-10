@@ -31,10 +31,6 @@ public class Movie {
         return description;
     }
 
-    //public List<String> getGenre(){
-    //    return genre;
-    //}
-
     public List<Genres> getGenreList() { return GenreList; }
 
     public boolean searchGenre(String target) {
@@ -44,7 +40,6 @@ public class Movie {
         }
         return false;
     }
-    //public static ObservableList<String> getGenre() {return Genres;}
 
     public boolean hasStringInTitleOrDescription(String context){
         return Arrays.stream(this.getTitle().split(" ")).anyMatch(word -> word.equals(context)) ||
