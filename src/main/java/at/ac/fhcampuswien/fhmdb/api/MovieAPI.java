@@ -1,35 +1,47 @@
 package at.ac.fhcampuswien.fhmdb.api;
+import at.ac.fhcampuswien.fhmdb.models.Movie;
 import com.google.gson.Gson;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import okhttp3.ResponseBody;
+
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class MovieAPI {
-    private static final OkHttpClient client = new OkHttpClient();
+    OkHttpClient client = new OkHttpClient();
+    Gson gson = new Gson();
 
-    String run(String url) throws IOException {
+    String jsonString;
+
+    public MovieAPI() throws IOException {
+        this.run("http://prog2.fh-campuswien.ac.at/movies");
+     }
+
+    public void run(String url) throws IOException {
+
         Request request = new Request.Builder()
                 .url(url)
+                .header("User-Agent","Firefox/112.0")
                 .build();
 
         try (Response response = client.newCall(request).execute()) {
-            return response.body().string();
+            ResponseBody responseBody = response.body();
+
+            if (responseBody != null) {
+                jsonString = responseBody.string();
+            }
         }
     }
 
-    public static <T> void main(String[] args) throws IOException {
-        CheckAPI example = new CheckAPI();
-        String response = null;
+    public Movie[] parseMovies() {
+        return gson.fromJson(jsonString, Movie[].class);
+    }
 
-        response = example.run("http://localhost:3002/users");
-
-        System.out.println(response);
-
-        Gson gson = new Gson();
-        User[] users = gson.fromJson(response, User[].class);
-
-        System.out.println(Arrays.toString(users));
+    public List<Movie> getMoviesAsList() {
+        return Arrays.asList(parseMovies());
     }
 }
