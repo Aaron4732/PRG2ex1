@@ -3,22 +3,47 @@ import com.google.gson.Gson;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import okhttp3.ResponseBody;
 
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 public class CheckAPI {
 
-    private static final OkHttpClient client = new OkHttpClient();
+
 
     String run(String url) throws IOException {
+        OkHttpClient client = new OkHttpClient();
+
         Request request = new Request.Builder()
                 .url(url)
+                .header("User-Agent","Firefox/112.0")
                 .build();
 
         try (Response response = client.newCall(request).execute()) {
-            return response.body().string();
+            ResponseBody responseBody = response.body();
+
+            if (responseBody != null) {
+                String jsonString = responseBody.string();
+                JSONArray jsonArray = new JSONArray(jsonString);
+
+                JSONObject jsonObject = jsonArray.getJSONObject(0);
+
+                // Einzelne Werte aus dem JSONObject abfragen
+                String title = jsonObject.getString("title");
+                int releaseYear = jsonObject.getInt("releaseYear");
+                double rating = jsonObject.getDouble("rating");
+
+                System.out.println(title);
+                System.out.println(releaseYear);
+                System.out.println(rating);
+            }
+
+            return "test";
         }
     }
 
@@ -26,28 +51,10 @@ public class CheckAPI {
         CheckAPI example = new CheckAPI();
         String response = null;
 
-        response = example.run("http://localhost:3002/users");
+        response = example.run("http://prog2.fh-campuswien.ac.at/movies");
 
         System.out.println(response);
 
-        Gson gson = new Gson();
-        User[] users = gson.fromJson(response, User[].class);
-
-        System.out.println(Arrays.toString(users));
-
-        double d = Arrays.stream(users)
-                .mapToDouble(User::getAge)
-                .average()
-                .orElse(0);
-
-        System.out.println("Average age="+d);
-
-        List<User> list = Arrays.stream(users)
-                .filter(s -> s.getUsername().startsWith("A"))
-                .toList();
-
-
-        list.stream().forEach(n -> System.out.println(n.getUsername()));
     }
 }
 
