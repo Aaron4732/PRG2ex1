@@ -6,9 +6,30 @@ import java.util.List;
 import java.util.Objects;
 
 public class Movie {
+
+    private String id;
+
     private String title;
+    private List<Genres> genres;
+
+    private int releaseYear;
     private String description;
-    private List<Genres> genre;
+
+    private String imgURL;
+
+    private int lengthInMinutes;
+
+    private String[] directors;
+
+    private String[] writers;
+
+    private String[] mainCAst;
+
+    private double rating;
+
+
+
+
 //  private static ObservableList<String> genreList = FXCollections.observableArrayList("All","Action", "Adventure", "Animation", "Biography", "Comedy", "Crime", "Drama", "Documentary", "Family", "Fantasy", "History", "Horror", "Musical", "Mystery", "Romance", "Science Fiction", "Sport", "Thriller", "War", "Western");
 
 
@@ -20,7 +41,7 @@ public class Movie {
         this.title = title;
         this.description = description;
    //     this.genre = List.of(genre);
-        this.genre = genres;
+        this.genres = genres;
     }
 
     public String getTitle() {
@@ -35,7 +56,7 @@ public class Movie {
 
     public boolean searchGenre(String target) {
         //return genre.contains(target);
-        for (Genres aktuellGenre : genre) {
+        for (Genres aktuellGenre : genres) {
             if (Objects.equals(aktuellGenre.toString(), target)) return true;
         }
         return false;
