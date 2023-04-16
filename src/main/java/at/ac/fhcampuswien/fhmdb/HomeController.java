@@ -29,11 +29,19 @@ public class HomeController implements Initializable {
     public JFXComboBox genreComboBox;
 
     @FXML
+    public JFXComboBox releaseYearComboBox;
+
+    @FXML
+    public JFXComboBox ratingComboBox;
+
+
+
+    @FXML
     public JFXButton sortBtn;
 
     public List<Movie> allMovies = Movie.initializeMovies();
 
-    private final ObservableList<Movie> observableMovies = FXCollections.observableArrayList();   // automatically updates corresponding UI elements when underlying data changes
+    private ObservableList<Movie> observableMovies = FXCollections.observableArrayList();   // automatically updates corresponding UI elements when underlying data changes
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -47,6 +55,11 @@ public class HomeController implements Initializable {
         genreComboBox.setPromptText("Filter by Genre");
         genreComboBox.setItems(FXCollections.observableArrayList(Genres.values())); //geändert von Trixi
 
+        releaseYearComboBox.setPromptText("Filter by Release Year");
+        releaseYearComboBox.getItems().addAll("1980 - 2000", "2000-2020", "above 2020");
+
+        ratingComboBox.setPromptText("Filter by Rating");
+        ratingComboBox.getItems().addAll("below 5.0", "5.0 - 9.0", "above 9.5");
 
         searchBtn.setOnAction(actionEvent -> {
 
