@@ -7,7 +7,6 @@ import okhttp3.Response;
 import java.io.IOException;
 import java.util.Arrays;
 
-
 public class MovieAPI {
     private static final OkHttpClient client = new OkHttpClient();
 
