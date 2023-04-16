@@ -1,4 +1,5 @@
 package at.ac.fhcampuswien.fhmdb.api;
+import at.ac.fhcampuswien.fhmdb.models.Movie;
 import com.google.gson.Gson;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -18,6 +19,7 @@ public class CheckAPI {
 
     String run(String url) throws IOException {
         OkHttpClient client = new OkHttpClient();
+        Gson gson = new Gson();
 
         Request request = new Request.Builder()
                 .url(url)
@@ -29,18 +31,13 @@ public class CheckAPI {
 
             if (responseBody != null) {
                 String jsonString = responseBody.string();
-                JSONArray jsonArray = new JSONArray(jsonString);
-
-                JSONObject jsonObject = jsonArray.getJSONObject(0);
+                Movie[] movies = gson.fromJson(jsonString, Movie[].class);
 
                 // Einzelne Werte aus dem JSONObject abfragen
-                String title = jsonObject.getString("title");
-                int releaseYear = jsonObject.getInt("releaseYear");
-                double rating = jsonObject.getDouble("rating");
 
+                Movie firstMovie = movies[0];
+                String title = firstMovie.getTitle();
                 System.out.println(title);
-                System.out.println(releaseYear);
-                System.out.println(rating);
             }
 
             return "test";
