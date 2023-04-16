@@ -1,6 +1,11 @@
-/* Auskommentiert von Trixi
 package at.ac.fhcampuswien.fhmdb.api;
+import com.google.gson.Gson;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
 import java.io.IOException;
+import java.util.Arrays;
 
 
 public class MovieAPI {
@@ -16,7 +21,7 @@ public class MovieAPI {
         }
     }
 
-    public static void main(String[] args) throws IOException {
+    public static <T> void main(String[] args) throws IOException {
         CheckAPI example = new CheckAPI();
         String response = null;
 
@@ -30,4 +35,3 @@ public class MovieAPI {
         System.out.println(Arrays.toString(users));
     }
 }
-*/
