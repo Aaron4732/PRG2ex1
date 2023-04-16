@@ -7,7 +7,9 @@ import okhttp3.Response;
 import okhttp3.ResponseBody;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class MovieAPI {
     OkHttpClient client = new OkHttpClient();
@@ -15,9 +17,8 @@ public class MovieAPI {
 
     String jsonString;
 
-    public Movie[] MovieAPI(String url) throws IOException {
-        this.run(url);
-        return movieParser();
+    public MovieAPI() throws IOException {
+        this.run("http://prog2.fh-campuswien.ac.at/movies");
      }
 
     public void run(String url) throws IOException {
@@ -36,7 +37,11 @@ public class MovieAPI {
         }
     }
 
-    public Movie[] movieParser() {
+    public Movie[] parseMovies() {
         return gson.fromJson(jsonString, Movie[].class);
+    }
+
+    public List<Movie> getMoviesAsList() {
+        return Arrays.asList(parseMovies());
     }
 }
