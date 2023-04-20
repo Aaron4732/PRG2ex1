@@ -54,7 +54,7 @@ public class HomeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        observableMovies.addAll(allAPIMovies);
+        observableMovies.addAll(movieAPI.getMoviesAsList());
         observableMovies.sort(new MovieComparatorASC());// add dummy data to observable list
 
         // initialize UI stuff
@@ -72,12 +72,18 @@ public class HomeController implements Initializable {
 
         searchBtn.setOnAction(actionEvent -> {
 
-            if(Objects.equals(searchField.getText(), "")){
-                searchWithNoSearchField();
+            System.out.println(genreComboBox.getSelectionModel().getSelectedItem().toString());
+            observableMovies.clear();
+            movieAPI.setGenre((Genres) genreComboBox.getSelectionModel().getSelectedItem());
+            //movieAPI.setSearchtext(searchField.getText());
+            try {
+                movieAPI.run();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
-            else{
-                searchWithSearchField();
-            }
+            observableMovies.addAll(movieAPI.getMoviesAsList());
+            movieListView.setItems(observableMovies);
+
         } );
 
         // Sort button example:
@@ -92,27 +98,20 @@ public class HomeController implements Initializable {
         });
     }
 
-    public void searchWithNoSearchField(){
+    public void searchWithNoSearchField() throws IOException {
         System.out.println(genreComboBox.getSelectionModel().getSelectedItem().toString());
-        if(Objects.equals(genreComboBox.getSelectionModel().getSelectedItem().toString(), "All")){
-            movieListView.setItems(observableMovies);
-        }
-        else {
-            movieListView.setItems(observableMovies.filtered(movie -> movie.searchGenre(genreComboBox.getSelectionModel().getSelectedItem().toString())));
-        }
+        observableMovies.clear();
+        movieAPI.setGenre((Genres) genreComboBox.getSelectionModel().getSelectedItem());
+        movieAPI.run();
+        observableMovies.addAll(movieAPI.getMoviesAsList());
+        movieListView.setItems(observableMovies);
     }
 
     public void searchWithSearchField(){
-        if(genreComboBox.getSelectionModel().getSelectedItem().toString() == "All"){
-            movieListView.setItems(observableMovies.filtered(movie ->
-                    movie.hasStringInTitleOrDescription(searchField.getText())));
-        }
-        else {
+
             movieListView.setItems(observableMovies.filtered(movie ->
                     movie.hasStringInTitleOrDescription(searchField.getText()) &&
                             movie.searchGenre((String) genreComboBox.getSelectionModel().getSelectedItem().toString())));
-
-        }
     }
 }
 
