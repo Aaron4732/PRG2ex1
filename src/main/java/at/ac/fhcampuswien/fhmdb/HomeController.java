@@ -54,6 +54,7 @@ public class HomeController implements Initializable {
     public HomeController() throws IOException {
     }
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         observableMovies.addAll(allAPIMovies);
@@ -119,9 +120,10 @@ public class HomeController implements Initializable {
 
     Stream<Movie> movieStream = allMovies.stream();
 
-    public long countMoviesFrom(List<Movie> movies, String director) {
+
+    public static long countMoviesFrom(List<Movie> movies, String director) {
         return movies.stream()
-                .filter(movie -> movie.getDirector().equals(director))
+                .filter(movie -> movie.getDirector().contains(director))
                 .count();
     }
 
