@@ -73,7 +73,18 @@ public class MovieAPI {
     private void ganerateURL() {
         url = basicURL;
         if (genre != null) {
-            url = url + "";
+            url = url + "?genre=" + genre;
+        }
+
+        if (genre != null && searchtext != null) {
+            url = url + "&";
+        }
+        else {
+            url = url + "?";
+        }
+
+        if (searchtext != null) {
+            url = url + "query=" + searchtext;
         }
     }
 }
