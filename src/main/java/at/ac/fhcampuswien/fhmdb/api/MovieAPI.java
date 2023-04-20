@@ -18,7 +18,7 @@ public class MovieAPI {
 
     String jsonString;
 
-    String searchtext = null;
+    String searchtext = "";
 
     String basicURL = "http://prog2.fh-campuswien.ac.at/movies";
 
@@ -62,29 +62,7 @@ public class MovieAPI {
         this.genre = genre;
     }
 
-    public void removeGenre() {
-        genre = Genres.ALL;
-    }
-
-    public void removeSearchtext() {
-        searchtext = null;
-    }
-
     private void ganerateURL() {
-        url = basicURL;
-        if (genre != Genres.ALL) {
-            url = url + "?genre=" + genre;
-        }
-
-        if (genre != Genres.ALL && searchtext != null) {
-            url = url + "&";
-        }
-        else if (searchtext != null){
-            url = url + "?";
-        }
-
-        if (searchtext != null) {
-            url = url + "query=" + searchtext;
-        }
+        url = basicURL + "?genre=" + genre + "&" + "query=" + searchtext;
     }
 }
