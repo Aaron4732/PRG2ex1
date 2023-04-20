@@ -16,6 +16,8 @@ import javafx.scene.control.TextField;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class HomeController implements Initializable {
     @FXML
@@ -51,6 +53,7 @@ public class HomeController implements Initializable {
 
     public HomeController() throws IOException {
     }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -113,6 +116,20 @@ public class HomeController implements Initializable {
                             movie.searchGenre((String) genreComboBox.getSelectionModel().getSelectedItem().toString())));
 
         }
+    }
+
+    Stream<Movie> movieStream = allMovies.stream();
+
+    public static long countMoviesFrom(List<Movie> movies, String director) {
+        return movies.stream()
+                .filter(movie -> movie.getDirector().contains(director))
+                .count();
+    }
+
+    public List<Movie> getMoviesBetweenYears(List<Movie> movies, int startYear, int endYear) {
+        return movies.stream()
+                .filter(movie -> movie.getYear() >= startYear && movie.getYear() <= endYear)
+                .collect(Collectors.toList());
     }
 }
 
