@@ -2,10 +2,12 @@ package test.at.ac.fhcampuswien.fhmdb;
 
 import at.ac.fhcampuswien.fhmdb.MovieComparatorASC;
 import at.ac.fhcampuswien.fhmdb.MovieComparatorDESC;
+import at.ac.fhcampuswien.fhmdb.api.MovieAPI;
 import at.ac.fhcampuswien.fhmdb.models.Genres;
 import at.ac.fhcampuswien.fhmdb.models.Movie;
 import at.ac.fhcampuswien.fhmdb.HomeController;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,9 +16,18 @@ import static org.junit.jupiter.api.Assertions.*;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+
 
 public class HomeControllerTest {
+
+    public MovieAPI movieAPI = new MovieAPI();
+
+    public HomeControllerTest() throws IOException {
+    }
 
     @Test
     void asc_sorter_check_1st_element_if_is_Antman() {
@@ -95,4 +106,21 @@ public class HomeControllerTest {
         assertEquals(firstExpectedElement, list.get(2).getTitle());
     }
 
+    @Test
+    void test_CountMoviesFrom_() {
+        List<Movie> movies = movieAPI.getMoviesAsList();
+
+        long count1 = HomeController.countMoviesFrom(movies, "Frank Darabont");
+
+        assertEquals(1, count1);
+
+    }
+
+
+
+   /* long count2 = HomeController.countMoviesFrom(movies, "Steven Spielberg");
+    long count3 = HomeController.countMoviesFrom(movies, "Annelies Deadlock");
+
+    Assertions.assertEquals(3, count2);
+    Assertions.assertEquals(0, count3);*/
 }
