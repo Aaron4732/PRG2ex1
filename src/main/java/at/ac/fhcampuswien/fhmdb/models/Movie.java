@@ -19,7 +19,7 @@ public class Movie {
 
     private int lengthInMinutes;
 
-    private String[] directors;
+    private List<String> directors;
 
     private String[] writers;
     private String[] mainCast;
@@ -49,6 +49,12 @@ public class Movie {
     public String getDescription() {
         return description;
     }
+
+    public List<String> getDirector() { return directors; }
+
+    public int getYear() { return releaseYear; }
+
+
 
     public List<Genres> getGenreList() { return GenreList; }
 
@@ -90,4 +96,5 @@ public class Movie {
 
         return movies;
     }
+
 }
