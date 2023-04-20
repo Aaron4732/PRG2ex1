@@ -121,6 +121,7 @@ public class HomeController implements Initializable {
     Stream<Movie> movieStream = allMovies.stream();
 
 
+
     public static long countMoviesFrom(List<Movie> movies, String director) {
         return movies.stream()
                 .filter(movie -> movie.getDirector().contains(director))
