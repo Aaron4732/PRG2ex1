@@ -52,6 +52,12 @@ public class Movie {
         return description;
     }
 
+    public String[] getDirector() { return directors; }
+
+    public int getYear() { return releaseYear; }
+
+
+
     public List<Genres> getGenreList() { return GenreList; }
 
     public boolean searchGenre(String target) {
@@ -84,4 +90,5 @@ public class Movie {
 
         return movies;
     }
+
 }
