@@ -36,17 +36,10 @@ public class HomeController implements Initializable {
     @FXML
     public JFXComboBox ratingComboBox;
 
-
-
     @FXML
     public JFXButton sortBtn;
 
-    public List<Movie> allMovies = Movie.initializeMovies();
-
     public MovieAPI movieAPI = new MovieAPI();
-
-    public List<Movie> allAPIMovies = movieAPI.getMoviesAsList();
-
     private final ObservableList<Movie> observableMovies = FXCollections.observableArrayList();   // automatically updates corresponding UI elements when underlying data changes
 
     public HomeController() throws IOException {
@@ -54,7 +47,7 @@ public class HomeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        observableMovies.addAll(allAPIMovies);
+        observableMovies.addAll(movieAPI.getMoviesAsList());
         observableMovies.sort(new MovieComparatorASC());// add dummy data to observable list
 
         // initialize UI stuff
@@ -62,7 +55,7 @@ public class HomeController implements Initializable {
         movieListView.setCellFactory(movieListView -> new MovieCell()); // use custom cell factory to display data
 
         genreComboBox.setPromptText("Filter by Genre");
-        genreComboBox.setItems(FXCollections.observableArrayList(Genres.values())); //geändert von Trixi
+        genreComboBox.setItems(FXCollections.observableArrayList(Genres.values()));
 
         releaseYearComboBox.setPromptText("Filter by Release Year");
         releaseYearComboBox.getItems().addAll("1980 - 2000", "2000-2020", "above 2020");
@@ -72,12 +65,21 @@ public class HomeController implements Initializable {
 
         searchBtn.setOnAction(actionEvent -> {
 
-            if(Objects.equals(searchField.getText(), "")){
-                searchWithNoSearchField();
+            observableMovies.clear();
+
+            movieAPI.setGenre((Genres) genreComboBox.getSelectionModel().getSelectedItem());
+
+            movieAPI.setSearchtext(searchField.getText());
+
+            try {
+                movieAPI.run();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
-            else{
-                searchWithSearchField();
-            }
+
+            observableMovies.addAll(movieAPI.getMoviesAsList());
+            movieListView.setItems(observableMovies);
+
         } );
 
         // Sort button example:
@@ -92,27 +94,5 @@ public class HomeController implements Initializable {
         });
     }
 
-    public void searchWithNoSearchField(){
-        System.out.println(genreComboBox.getSelectionModel().getSelectedItem().toString());
-        if(Objects.equals(genreComboBox.getSelectionModel().getSelectedItem().toString(), "All")){
-            movieListView.setItems(observableMovies);
-        }
-        else {
-            movieListView.setItems(observableMovies.filtered(movie -> movie.searchGenre(genreComboBox.getSelectionModel().getSelectedItem().toString())));
-        }
-    }
-
-    public void searchWithSearchField(){
-        if(genreComboBox.getSelectionModel().getSelectedItem().toString() == "All"){
-            movieListView.setItems(observableMovies.filtered(movie ->
-                    movie.hasStringInTitleOrDescription(searchField.getText())));
-        }
-        else {
-            movieListView.setItems(observableMovies.filtered(movie ->
-                    movie.hasStringInTitleOrDescription(searchField.getText()) &&
-                            movie.searchGenre((String) genreComboBox.getSelectionModel().getSelectedItem().toString())));
-
-        }
-    }
 }
 
