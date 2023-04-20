@@ -68,12 +68,7 @@ public class HomeController implements Initializable {
             System.out.println(genreComboBox.getSelectionModel().getSelectedItem().toString());
             observableMovies.clear();
 
-            if (genreComboBox.getSelectionModel().getSelectedItem() == null) {
-                movieAPI.setGenre(Genres.ALL);
-            }
-            else {
-                movieAPI.setGenre((Genres) genreComboBox.getSelectionModel().getSelectedItem());
-            }
+            movieAPI.setGenre((Genres) genreComboBox.getSelectionModel().getSelectedItem());
 
             movieAPI.setSearchtext(searchField.getText());
             try {
