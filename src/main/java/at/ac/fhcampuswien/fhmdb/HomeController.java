@@ -45,8 +45,6 @@ public class HomeController implements Initializable {
 
     public MovieAPI movieAPI = new MovieAPI();
 
-    public List<Movie> allAPIMovies = movieAPI.getMoviesAsList();
-
     private final ObservableList<Movie> observableMovies = FXCollections.observableArrayList();   // automatically updates corresponding UI elements when underlying data changes
 
     public HomeController() throws IOException {
@@ -98,20 +96,5 @@ public class HomeController implements Initializable {
         });
     }
 
-    public void searchWithNoSearchField() throws IOException {
-        System.out.println(genreComboBox.getSelectionModel().getSelectedItem().toString());
-        observableMovies.clear();
-        movieAPI.setGenre((Genres) genreComboBox.getSelectionModel().getSelectedItem());
-        movieAPI.run();
-        observableMovies.addAll(movieAPI.getMoviesAsList());
-        movieListView.setItems(observableMovies);
-    }
-
-    public void searchWithSearchField(){
-
-            movieListView.setItems(observableMovies.filtered(movie ->
-                    movie.hasStringInTitleOrDescription(searchField.getText()) &&
-                            movie.searchGenre((String) genreComboBox.getSelectionModel().getSelectedItem().toString())));
-    }
 }
 
