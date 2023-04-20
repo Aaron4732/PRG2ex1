@@ -55,7 +55,7 @@ public class HomeController implements Initializable {
         movieListView.setCellFactory(movieListView -> new MovieCell()); // use custom cell factory to display data
 
         genreComboBox.setPromptText("Filter by Genre");
-        genreComboBox.setItems(FXCollections.observableArrayList(Genres.values())); //geändert von Trixi
+        genreComboBox.setItems(FXCollections.observableArrayList(Genres.values()));
 
         releaseYearComboBox.setPromptText("Filter by Release Year");
         releaseYearComboBox.getItems().addAll("1980 - 2000", "2000-2020", "above 2020");
@@ -65,17 +65,18 @@ public class HomeController implements Initializable {
 
         searchBtn.setOnAction(actionEvent -> {
 
-            System.out.println(genreComboBox.getSelectionModel().getSelectedItem().toString());
             observableMovies.clear();
 
             movieAPI.setGenre((Genres) genreComboBox.getSelectionModel().getSelectedItem());
 
             movieAPI.setSearchtext(searchField.getText());
+
             try {
                 movieAPI.run();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+
             observableMovies.addAll(movieAPI.getMoviesAsList());
             movieListView.setItems(observableMovies);
 
