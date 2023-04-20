@@ -83,11 +83,11 @@ public class HomeController implements Initializable {
             observableMovies.addAll(movieAPI.getMoviesAsList());
             movieListView.setItems(observableMovies);
 
-        } );
+        });
 
         // Sort button example:
         sortBtn.setOnAction(actionEvent -> {
-            if(sortBtn.getText().equals("Sort (asc)")) {
+            if (sortBtn.getText().equals("Sort (asc)")) {
                 observableMovies.sort(new MovieComparatorASC());
                 sortBtn.setText("Sort (desc)");
             } else {
@@ -96,10 +96,6 @@ public class HomeController implements Initializable {
             }
         });
     }
-
-    Stream<Movie> movieStream = allMovies.stream();
-
-
 
     public static long countMoviesFrom(List<Movie> movies, String director) {
         return movies.stream()
@@ -112,4 +108,5 @@ public class HomeController implements Initializable {
                 .filter(movie -> movie.getYear() >= startYear && movie.getYear() <= endYear)
                 .collect(Collectors.toList());
     }
+}
 
