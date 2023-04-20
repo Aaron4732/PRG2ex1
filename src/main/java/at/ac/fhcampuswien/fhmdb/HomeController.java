@@ -36,15 +36,10 @@ public class HomeController implements Initializable {
     @FXML
     public JFXComboBox ratingComboBox;
 
-
-
     @FXML
     public JFXButton sortBtn;
 
-    public List<Movie> allMovies = Movie.initializeMovies();
-
     public MovieAPI movieAPI = new MovieAPI();
-
     private final ObservableList<Movie> observableMovies = FXCollections.observableArrayList();   // automatically updates corresponding UI elements when underlying data changes
 
     public HomeController() throws IOException {
@@ -72,7 +67,14 @@ public class HomeController implements Initializable {
 
             System.out.println(genreComboBox.getSelectionModel().getSelectedItem().toString());
             observableMovies.clear();
-            movieAPI.setGenre((Genres) genreComboBox.getSelectionModel().getSelectedItem());
+
+            if (genreComboBox.getSelectionModel().getSelectedItem() == null) {
+                movieAPI.setGenre(Genres.ALL);
+            }
+            else {
+                movieAPI.setGenre((Genres) genreComboBox.getSelectionModel().getSelectedItem());
+            }
+
             movieAPI.setSearchtext(searchField.getText());
             try {
                 movieAPI.run();
