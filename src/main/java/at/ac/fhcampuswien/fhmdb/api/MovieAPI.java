@@ -12,16 +12,13 @@ import java.util.Arrays;
 import java.util.List;
 
 public class MovieAPI {
-    OkHttpClient client = new OkHttpClient();
-    Gson gson = new Gson();
+
 
     String jsonString;
 
     String searchtext = "";
 
-    String basicURL = "http://prog2.fh-campuswien.ac.at/movies";
-
-    String url;
+    private final static String BASIC_URL = "http://prog2.fh-campuswien.ac.at/movies";
 
     Genres genre = Genres.ALL;
     public MovieAPI() throws IOException {
@@ -29,8 +26,8 @@ public class MovieAPI {
     }
 
     public void run() throws IOException {
-
-        ganerateURL();
+        OkHttpClient client = new OkHttpClient();
+        String url = ganerateURL();
 
         Request request = new Request.Builder()
                 .url(url)
@@ -47,6 +44,7 @@ public class MovieAPI {
     }
 
     public Movie[] parseMovies() {
+        Gson gson = new Gson();
         return gson.fromJson(jsonString, Movie[].class);
     }
     public List<Movie> getMoviesAsList() {
@@ -61,7 +59,7 @@ public class MovieAPI {
         this.genre = genre;
     }
 
-    private void ganerateURL() {
-        url = basicURL + "?genre=" + genre + "&" + "query=" + searchtext;
+    private String ganerateURL() {
+        return BASIC_URL + "?genre=" + genre + "&" + "query=" + searchtext;
     }
 }
