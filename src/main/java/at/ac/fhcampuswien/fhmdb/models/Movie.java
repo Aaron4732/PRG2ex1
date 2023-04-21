@@ -25,7 +25,7 @@ public class Movie {
 
     private String[] mainCAst;
 
-    private double rating;
+    private float rating;
 
 
 
@@ -42,6 +42,7 @@ public class Movie {
         this.description = description;
    //     this.genre = List.of(genre);
         this.genres = genres;
+//        this.releaseYear = releaseYear;
     }
 
     public String getTitle() {
