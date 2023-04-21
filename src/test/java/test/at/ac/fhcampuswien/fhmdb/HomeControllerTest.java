@@ -24,6 +24,8 @@ import java.util.List;
 
 public class HomeControllerTest {
 
+
+
     public MovieAPI movieAPI = new MovieAPI();
 
     public HomeControllerTest() throws IOException {
@@ -107,22 +109,33 @@ public class HomeControllerTest {
     }
 
     @Test
-    void test_CountMoviesFrom_() {
+    void test_CountMoviesFrom_if_all_movies_were_counted_from_a_director() {
+        //given
         List<Movie> movies = movieAPI.getMoviesAsList();
-
-        long count1 = HomeController.countMoviesFrom(movies, "Frank Darabont");
-
-        assertEquals(1, count1);
+        //when
+        long count = HomeController.countMoviesFrom(movies, "Peter Jackson");
+        //then
+        assertEquals(2, count);
 
     }
 
+    @Test
+    void test_CountMoviesFrom_if_not_present_director_returns_0() {
+        //given
+        List<Movie> movies = movieAPI.getMoviesAsList();
+        //when
+        long count = HomeController.countMoviesFrom(movies, "Anneliese Deadlock");
+        //then
+        assertEquals(0, count);
 
+    }
 
-   /* long count2 = HomeController.countMoviesFrom(movies, "Steven Spielberg");
+    /* long count2 = HomeController.countMoviesFrom(movies, "Steven Spielberg");
     long count3 = HomeController.countMoviesFrom(movies, "Annelies Deadlock");
 
     Assertions.assertEquals(3, count2);
     Assertions.assertEquals(0, count3);*/
+
     @Test
     void testGetMostPopularActor() {
         List <Movie> movies = movieAPI.getMoviesAsList();
@@ -155,4 +168,25 @@ public class HomeControllerTest {
         assertNotEquals(10, longestMovieTitle);
     }
 
+    @Test
+    void test_getMoviesBetweenYears_if_movies_are_within_years() {
+        //given
+        List<Movie> movies = movieAPI.getMoviesAsList();
+        //when
+        List<Movie> moviesBetweenYears = HomeController.getMoviesBetweenYears(movies, 2000,2010);
+        //then
+        assertEquals(7, moviesBetweenYears.size());
+
+    }
+
+    @Test
+    void test_getMoviesBetweenYears_if_no_movies_are_within_years() {
+        //given
+        List<Movie> movies = movieAPI.getMoviesAsList();
+        //when
+        List<Movie> moviesBetweenYears = HomeController.getMoviesBetweenYears(movies, 1960,1965);
+        //then
+        assertEquals(0, moviesBetweenYears.size());
+
+    }
 }

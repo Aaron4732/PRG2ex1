@@ -117,7 +117,7 @@ public class HomeController implements Initializable {
                 .count();
     }
 
-    public List<Movie> getMoviesBetweenYears(List<Movie> movies, int startYear, int endYear) {
+    public static List<Movie> getMoviesBetweenYears(List<Movie> movies, int startYear, int endYear) {
         return movies.stream()
                 .filter(movie -> movie.getYear() >= startYear && movie.getYear() <= endYear)
                 .collect(Collectors.toList());
