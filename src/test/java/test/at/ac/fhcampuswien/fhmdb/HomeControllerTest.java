@@ -137,6 +137,38 @@ public class HomeControllerTest {
     Assertions.assertEquals(0, count3);*/
 
     @Test
+    void testGetMostPopularActor() {
+        List <Movie> movies = movieAPI.getMoviesAsList();
+
+        String mostPopularActor = HomeController.getMostPopularActor(movies);
+
+        assertEquals("Tom Hanks", mostPopularActor);
+    }
+
+    @Test
+    void testGetMostPopularActorFalse() {
+        List <Movie> movies = movieAPI.getMoviesAsList();
+
+        String mostPopularActor = HomeController.getMostPopularActor(movies);
+
+        assertNotEquals("Max Mustermann", mostPopularActor);
+    }
+
+    @Test
+    void testGetLongestTitle() {
+        List <Movie> movies = movieAPI.getMoviesAsList();
+        int longestMovieTitle = HomeController.getLongestMovieTitle(movies);
+        assertEquals(201, longestMovieTitle);
+    }
+
+    @Test
+    void testGetLongestTitleFalse() {
+        List <Movie> movies = movieAPI.getMoviesAsList();
+        int longestMovieTitle = HomeController.getLongestMovieTitle(movies);
+        assertNotEquals(10, longestMovieTitle);
+    }
+
+    @Test
     void test_getMoviesBetweenYears_if_movies_are_within_years() {
         //given
         List<Movie> movies = movieAPI.getMoviesAsList();

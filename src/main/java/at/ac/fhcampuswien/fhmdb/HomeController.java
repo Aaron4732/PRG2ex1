@@ -97,6 +97,20 @@ public class HomeController implements Initializable {
         });
     }
 
+    public static String getMostPopularActor(List<Movie> movies) {
+        Map<String, Long> actorCount = movies.stream()
+                .flatMap(movie -> Arrays.stream(movie.getMainCast()))
+                .collect(Collectors.groupingBy(actor -> actor, Collectors.counting()));
+        return Collections.max(actorCount.entrySet(), Map.Entry.comparingByValue())
+                .getKey();
+    }
+
+    public static int getLongestMovieTitle(List<Movie> movies) {
+        return movies.stream()
+                .mapToInt(movie -> movie.getLengthInMinutes())
+                .max().orElse(0);
+    }
+
     public static long countMoviesFrom(List<Movie> movies, String director) {
         return movies.stream()
                 .filter(movie -> movie.getDirector().contains(director))

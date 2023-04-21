@@ -22,11 +22,9 @@ public class Movie {
     private List<String> directors;
 
     private String[] writers;
-
-    private String[] mainCAst;
+    private String[] mainCast;
 
     private float rating;
-
 
 
 
@@ -40,7 +38,7 @@ public class Movie {
     public Movie(String title, String description, List<Genres> genres) {
         this.title = title;
         this.description = description;
-   //     this.genre = List.of(genre);
+        // this.genre = List.of(genre);
         this.genres = genres;
 //        this.releaseYear = releaseYear;
     }
@@ -60,6 +58,14 @@ public class Movie {
 
 
     public List<Genres> getGenreList() { return GenreList; }
+
+    public String[] getMainCast() {
+        return mainCast;
+    }
+
+    public int getLengthInMinutes() {
+        return lengthInMinutes;
+    }
 
     public boolean searchGenre(String target) {
         //return genre.contains(target);
