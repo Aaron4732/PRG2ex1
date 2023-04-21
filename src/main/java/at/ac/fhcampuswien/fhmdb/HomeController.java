@@ -96,7 +96,8 @@ public class HomeController implements Initializable {
             }
         });
     }
-    public String getMostPopularActor(List<Movie> movies) {
+
+    public static String getMostPopularActor(List<Movie> movies) {
         Map<String, Long> actorCount = movies.stream()
                 .flatMap(movie -> Arrays.stream(movie.getMainCast()))
                 .collect(Collectors.groupingBy(actor -> actor, Collectors.counting()));
@@ -104,7 +105,7 @@ public class HomeController implements Initializable {
                 .getKey();
     }
 
-    public int getLongestMovieTitle(List<Movie> movies) {
+    public static int getLongestMovieTitle(List<Movie> movies) {
         return movies.stream()
                 .mapToInt(movie -> movie.getLengthInMinutes())
                 .max().orElse(0);

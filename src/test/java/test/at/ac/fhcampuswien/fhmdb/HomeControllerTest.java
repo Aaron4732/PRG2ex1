@@ -123,4 +123,18 @@ public class HomeControllerTest {
 
     Assertions.assertEquals(3, count2);
     Assertions.assertEquals(0, count3);*/
+    @Test
+    void testGetMostPopularActor() {
+        List <Movie> movies = movieAPI.getMoviesAsList();
+
+        String mostPopularActor = HomeController.getMostPopularActor(movies);
+        assertEquals("Tom Hanks", mostPopularActor);
+    }
+
+    @Test
+    void testGetLongestTitle() {
+        List <Movie> movies = movieAPI.getMoviesAsList();
+        int longestMovieTitle = HomeController.getLongestMovieTitle(movies);
+        assertEquals(201, longestMovieTitle);
+    }
 }
