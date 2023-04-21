@@ -128,7 +128,17 @@ public class HomeControllerTest {
         List <Movie> movies = movieAPI.getMoviesAsList();
 
         String mostPopularActor = HomeController.getMostPopularActor(movies);
+
         assertEquals("Tom Hanks", mostPopularActor);
+    }
+
+    @Test
+    void testGetMostPopularActorFalse() {
+        List <Movie> movies = movieAPI.getMoviesAsList();
+
+        String mostPopularActor = HomeController.getMostPopularActor(movies);
+
+        assertNotEquals("Max Mustermann", mostPopularActor);
     }
 
     @Test
@@ -137,4 +147,12 @@ public class HomeControllerTest {
         int longestMovieTitle = HomeController.getLongestMovieTitle(movies);
         assertEquals(201, longestMovieTitle);
     }
+
+    @Test
+    void testGetLongestTitleFalse() {
+        List <Movie> movies = movieAPI.getMoviesAsList();
+        int longestMovieTitle = HomeController.getLongestMovieTitle(movies);
+        assertNotEquals(10, longestMovieTitle);
+    }
+
 }
